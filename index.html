@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VOXLIS.NET Clone</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: #000; color: white; }
+    .container { padding: 2rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .header h1 { font-size: 2rem; color: #f00; }
+    .header h1 span { color: white; }
+    .buttons button { background: transparent; border: 1px solid white; color: white; margin-left: 0.5rem; padding: 0.5rem 1rem; cursor: pointer; }
+    .buttons .red { background-color: #dc2626; border: none; }
+    .content { display: flex; gap: 2rem; }
+    aside { width: 25%; }
+    main { width: 75%; }
+    .filter-section { margin-bottom: 2rem; }
+    .filter-section h2 { color: #f87171; }
+    .filter-labels label { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .tutorial { background: #171717; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 0 10px #000; margin-bottom: 2rem; }
+    .tutorial h2 { font-size: 1.5rem; }
+    .tutorial span { color: #f87171; }
+    .tutorial button { background-color: #dc2626; color: white; padding: 0.5rem 1rem; border: none; cursor: pointer; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .card { background: #262626; padding: 1rem; border-radius: 1rem; }
+    .card h3 { margin: 0; font-size: 1.2rem; }
+    .card p { margin: 0.5rem 0; }
+    .blue { color: #60a5fa; }
+    .tab-btn {
+      background: #262626;
+      color: white;
+      border: 1px solid #444;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    .tab-btn.active {
+      background: #dc2626;
+      border-color: #dc2626;
+    }
+    pre {
+      background: #1f1f1f;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      margin-top: 0.5rem;
+    }
+    .card button {
+      margin-top: 0.5rem;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      border-radius: 0.4rem;
+    }
+    .card button:hover {
+      background: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>WWW.<span>dark executor</span>.NET</h1>
+      <div class="buttons">
+        
+      </div>
+    </div>
+
+    <div class="content">
+      <aside>
+        <div class="filter-section">
+          <h2>Filters</h2>
+          <p>Level (Power)</p>
+          <input type="range" min="0" max="8" value="8" />
+        </div>
+        <div class="filter-section">
+          <p>Platform</p>
+          <div class="filter-labels">
+            <label><input type="checkbox" /> Windows</label>
+            <label><input type="checkbox" /> MacOS</label>
+            <label><input type="checkbox" /> Android</label>
+            <label><input type="checkbox" /> iOS</label>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        
+        <!-- Tabs -->
+        <div style="margin-bottom: 1rem;">
+          <button onclick="showTab('exploits')" class="tab-btn active" id="exploitsTab">Exploits</button>
+          <button onclick="showTab('scripts')" class="tab-btn" id="scriptsTab">Scripts</button>
+        </div>
+
+        <!-- Exploits Tab -->
+        <div id="exploits" class="tab-content">
+          <div class="grid">
+            <div class="card">
+              <h3>Zenith <span class="blue">✔</span></h3>
+              <p>The best overall value exploit.</p>
+              <p>Level 8 - Premium</p>
+            </div>
+            <div class="card">
+              <h3>AWP.gg <span class="blue">✔</span></h3>
+              <p>Emulates Hyperion for maximum safety.</p>
+              <p>Level 8 - Premium</p>
+            </div>
+            <div class="card">
+              <h3>Swift <span class="blue">✔</span></h3>
+              <p>The free Level 8 exploit to use.</p>
+              <p>Level 8 - Premium</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scripts Tab -->
+        <div id="scripts" class="tab-content" style="display: none;">
+          <div class="grid">
+            <div class="card">
+              <h3>vexon hub <span class="blue">✔</span></h3>
+              <p>vexon hub.</p>
+              <p>best TSB script</p>
+              <pre id="script1">-- key is VexonHub_2 discord is https://discord.gg/8ccQvNadrT
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()</pre>
+              <button onclick="copyScript('script1')">📋 Copy Script</button>
+            </div>
+
+            <div class="card">
+              <h3>ESP Vision <span class="blue">✔</span></h3>
+              <p>Wallhacks and enemy tracking enabled.</p>
+              <p>i do not know if its working</p>
+              <pre id="script2">-- ESP Vision
+for _,v in pairs(game.Players:GetPlayers()) do
+  if v ~= game.Players.LocalPlayer then
+    print("Tracking: "..v.Name)
+  end
+end</pre>
+              <button onclick="copyScript('script2')">📋 Copy Script</button>
+            </div>
+
+            <div class="card">
+              <h3>soon? <span class="blue">✔</span></h3>
+              <p>coming soon.</p>
+              <p>Version: none</p>
+              <pre id="script3">--</pre>
+              <button onclick="copyScript('script3')">📋 Copy Script</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabName) {
+      const tabs = ['exploits', 'scripts'];
+      tabs.forEach(tab => {
+        document.getElementById(tab).style.display = tab === tabName ? 'block' : 'none';
+        document.getElementById(tab + 'Tab').classList.toggle('active', tab === tabName);
+      });
+    }
+
+    function copyScript(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Script copied!");
+      });
+    }
+  </script>
+</body>
+</html>

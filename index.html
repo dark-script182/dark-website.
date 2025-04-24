@@ -70,15 +70,10 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 0.95rem;
+      text-decoration: none;
     }
     
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-    
-    .btn-primary {
+    .btn-discord {
       background: var(--primary);
       color: white;
     }
@@ -162,11 +157,10 @@
     
     .card-footer {
       display: flex;
-      gap: 0.75rem;
     }
     
     .card-btn {
-      flex: 1;
+      width: 100%;
       padding: 0.75rem;
       border-radius: 8px;
       font-weight: 600;
@@ -175,15 +169,7 @@
       justify-content: center;
       gap: 0.5rem;
       text-decoration: none;
-    }
-    
-    .card-btn.discord {
       background: var(--primary);
-      color: white;
-    }
-    
-    .card-btn.download {
-      background: #333;
       color: white;
     }
     
@@ -260,8 +246,7 @@
     <div class="header">
       <div class="logo">DARK HUB</div>
       <div class="buttons">
-        <a href="https://discord.gg/8Mk6KXTYQj" class="btn btn-outline" target="_blank"><i class="fab fa-discord"></i> Our Discord</a>
-        <button class="btn btn-primary"><i class="fas fa-download"></i> Download</button>
+        <a href="https://discord.gg/8Mk6KXTYQj" class="btn btn-discord" target="_blank"><i class="fab fa-discord"></i> Join Our Discord</a>
       </div>
     </div>
     
@@ -289,8 +274,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <a href="https://discord.gg/xeno-now" class="card-btn discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-            <a href="#" class="card-btn download"><i class="fas fa-download"></i> Download</a>
+            <a href="https://discord.gg/xeno-now" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
           </div>
         </div>
       </div>
@@ -300,7 +284,7 @@
         <div class="card-badge">NEW</div>
         <div class="card-header">
           <div class="card-title"><i class="fas fa-cloud"></i> Cloudy</div>
-          <div class="card-desc">good executor with an api so you can make your own executor</div>
+          <div class="card-desc">Good executor with an API so you can make your own executor</div>
         </div>
         <div class="card-body">
           <div class="features">
@@ -318,8 +302,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <a href="https://discord.gg/getcloudy" class="card-btn discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-            <a href="#" class="card-btn download"><i class="fas fa-download"></i> Download</a>
+            <a href="https://discord.gg/getcloudy" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
           </div>
         </div>
       </div>
@@ -346,8 +329,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <a href="https://discord.gg/QzzXFxGu" class="card-btn discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-            <a href="#" class="card-btn download"><i class="fas fa-download"></i> Download</a>
+            <a href="https://discord.gg/QzzXFxGu" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
           </div>
         </div>
       </div>
@@ -371,19 +353,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/
         alert('✅ Script copied to clipboard!');
       });
     }
-    
-    // Simulate download buttons
-    document.querySelectorAll('.card-btn.download').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('⚠️ Join the Discord server to download this executor');
-      });
-    });
-    
-    // Make header button point to your Discord
-    document.querySelector('.btn-primary').addEventListener('click', () => {
-      window.open('https://discord.gg/8Mk6KXTYQj', '_blank');
-    });
   </script>
 </body>
 </html>

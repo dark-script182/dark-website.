@@ -1,177 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VOXLIS.NET Clone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DARK HUB | Executor Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { margin: 0; font-family: sans-serif; background: #000; color: white; }
-    .container { padding: 2rem; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-    .header h1 { font-size: 2rem; color: #f00; }
-    .header h1 span { color: white; }
-    .buttons button { background: transparent; border: 1px solid white; color: white; margin-left: 0.5rem; padding: 0.5rem 1rem; cursor: pointer; }
-    .buttons .red { background-color: #dc2626; border: none; }
-    .content { display: flex; gap: 2rem; }
-    aside { width: 25%; }
-    main { width: 75%; }
-    .filter-section { margin-bottom: 2rem; }
-    .filter-section h2 { color: #f87171; }
-    .filter-labels label { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
-    .tutorial { background: #171717; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 0 10px #000; margin-bottom: 2rem; }
-    .tutorial h2 { font-size: 1.5rem; }
-    .tutorial span { color: #f87171; }
-    .tutorial button { background-color: #dc2626; color: white; padding: 0.5rem 1rem; border: none; cursor: pointer; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-    .card { background: #262626; padding: 1rem; border-radius: 1rem; }
-    .card h3 { margin: 0; font-size: 1.2rem; }
-    .card p { margin: 0.5rem 0; }
-    .blue { color: #60a5fa; }
-    .tab-btn {
-      background: #262626;
-      color: white;
-      border: 1px solid #444;
-      padding: 0.5rem 1rem;
+    :root {
+      --primary: #5865F2;
+      --secondary: #1a1a1a;
+      --accent: #57F287;
+      --text: #f8f9fa;
+      --card-bg: #23272A;
+      --danger: #ED4245;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      transition: all 0.2s ease;
+    }
+    
+    body {
+      background: #121212;
+      color: var(--text);
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 10% 20%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 90%);
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #333;
+    }
+    
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #dc2626, #9b59b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
       cursor: pointer;
-      margin-right: 0.5rem;
-      border-radius: 0.5rem;
+      font-weight: 600;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
     }
-    .tab-btn.active {
-      background: #dc2626;
-      border-color: #dc2626;
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
     }
-    pre {
-      background: #1f1f1f;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      overflow-x: auto;
-      font-size: 0.85rem;
-      white-space: pre-wrap;
-      margin-top: 0.5rem;
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
     }
-    .card button {
-      margin-top: 0.5rem;
+    
+    /* Main Content */
+    .main-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .executor-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      border: 1px solid #333;
+      position: relative;
+    }
+    
+    .executor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    
+    .card-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--accent);
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    .card-header {
+      padding: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #333;
+    }
+    
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .card-desc {
+      font-size: 0.95rem;
+      color: #b5bac1;
+      line-height: 1.5;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .features {
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    
+    .feature i {
+      color: var(--accent);
+      width: 20px;
+      text-align: center;
+    }
+    
+    .card-footer {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .card-btn {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    
+    .card-btn.discord {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .card-btn.download {
       background: #333;
       color: white;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      cursor: pointer;
-      border-radius: 0.4rem;
     }
-    .card button:hover {
-      background: #dc2626;
+    
+    /* Script Section */
+    .script-section {
+      margin-top: 3rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .script-box {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 1.5rem;
+      position: relative;
+    }
+    
+    pre {
+      font-family: 'Consolas', monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      color: #c9d1d9;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+    
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .copy-btn:hover {
+      background: var(--primary);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>WWW.<span>dark executor</span>.NET</h1>
+      <div class="logo">DARK HUB</div>
       <div class="buttons">
-        
+        <a href="https://discord.gg/8Mk6KXTYQj" class="btn btn-outline" target="_blank"><i class="fab fa-discord"></i> Our Discord</a>
+        <button class="btn btn-primary"><i class="fas fa-download"></i> Download</button>
       </div>
     </div>
-
-    <div class="content">
-      <aside>
-        <div class="filter-section">
-          <h2>Filters</h2>
-          <p>Level (Power)</p>
-          <input type="range" min="0" max="8" value="8" />
+    
+    <div class="main-grid">
+      <!-- Xeno -->
+      <div class="executor-card">
+        <div class="card-badge">BEST</div>
+        <div class="card-header">
+          <div class="card-title"><i class="fas fa-bolt"></i> Xeno</div>
+          <div class="card-desc">The most powerful and undetected executor with Hyperion-level execution</div>
         </div>
-        <div class="filter-section">
-          <p>Platform</p>
-          <div class="filter-labels">
-            <label><input type="checkbox" /> Windows</label>
-            <label><input type="checkbox" /> MacOS</label>
-            <label><input type="checkbox" /> Android</label>
-            <label><input type="checkbox" /> iOS</label>
-          </div>
-        </div>
-      </aside>
-
-      <main>
-        
-        <!-- Tabs -->
-        <div style="margin-bottom: 1rem;">
-          <button onclick="showTab('exploits')" class="tab-btn active" id="exploitsTab">Exploits</button>
-          <button onclick="showTab('scripts')" class="tab-btn" id="scriptsTab">Scripts</button>
-        </div>
-
-        <!-- Exploits Tab -->
-        <div id="exploits" class="tab-content">
-          <div class="grid">
-            <div class="card">
-              <h3>Zenith <span class="blue">✔</span></h3>
-              <p>The best overall value exploit.</p>
-              <p>Level 8 - Premium</p>
+        <div class="card-body">
+          <div class="features">
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Level 8 Execution</span>
             </div>
-            <div class="card">
-              <h3>AWP.gg <span class="blue">✔</span></h3>
-              <p>Emulates Hyperion for maximum safety.</p>
-              <p>Level 8 - Premium</p>
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Hyperion Emulation</span>
             </div>
-            <div class="card">
-              <h3>Swift <span class="blue">✔</span></h3>
-              <p>The free Level 8 exploit to use.</p>
-              <p>Level 8 - Premium</p>
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Windows 10/11</span>
             </div>
           </div>
-        </div>
-
-        <!-- Scripts Tab -->
-        <div id="scripts" class="tab-content" style="display: none;">
-          <div class="grid">
-            <div class="card">
-              <h3>vexon hub <span class="blue">✔</span></h3>
-              <p>vexon hub.</p>
-              <p>best TSB script</p>
-              <pre id="script1">-- key is VexonHub_3 discord is https://discord.gg/8ccQvNadrT
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()</pre>
-              <button onclick="copyScript('script1')">📋 Copy Script</button>
-            </div>
-
-            <div class="card">
-              <h3>ESP Vision <span class="blue">✔</span></h3>
-              <p>Wallhacks and enemy tracking enabled.</p>
-              <p>i do not know if its working</p>
-              <pre id="script2">-- ESP Vision
-for _,v in pairs(game.Players:GetPlayers()) do
-  if v ~= game.Players.LocalPlayer then
-    print("Tracking: "..v.Name)
-  end
-end</pre>
-              <button onclick="copyScript('script2')">📋 Copy Script</button>
-            </div>
-
-            <div class="card">
-              <h3>soon? <span class="blue">✔</span></h3>
-              <p>coming soon.</p>
-              <p>Version: none</p>
-              <pre id="script3">--</pre>
-              <button onclick="copyScript('script3')">📋 Copy Script</button>
-            </div>
+          <div class="card-footer">
+            <a href="https://discord.gg/xeno-now" class="card-btn discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+            <a href="#" class="card-btn download"><i class="fas fa-download"></i> Download</a>
           </div>
         </div>
-      </main>
+      </div>
+      
+      <!-- Cloudy -->
+      <div class="executor-card">
+        <div class="card-badge">NEW</div>
+        <div class="card-header">
+          <div class="card-title"><i class="fas fa-cloud"></i> Cloudy</div>
+          <div class="card-desc">Cloud-based executor with auto-updating features and script hub</div>
+        </div>
+        <div class="card-body">
+          <div class="features">
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Level 7 Execution</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Built-in Script Hub</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Windows/Mac</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://discord.gg/getcloudy" class="card-btn discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+            <a href="#" class="card-btn download"><i class="fas fa-download"></i> Download</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SubZero -->
+      <div class="executor-card">
+        <div class="card-header">
+          <div class="card-title"><i class="fas fa-snowflake"></i> SubZero</div>
+          <div class="card-desc">Lightweight executor focused on speed and stability</div>
+        </div>
+        <div class="card-body">
+          <div class="features">
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Level 6 Execution</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Low Detection Rate</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-check"></i>
+              <span>Windows 7+</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://discord.gg/QzzXFxGu" class="card-btn discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+            <a href="#" class="card-btn download"><i class="fas fa-download"></i> Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- VexonHub Script Section -->
+    <div class="script-section">
+      <h2 class="section-title"><i class="fas fa-code"></i> VexonHub Script</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyToClipboard('vexonScript')"><i class="far fa-copy"></i> Copy</button>
+        <pre id="vexonScript">-- key is VexonHub_3 discord is https://discord.gg/8ccQvNadrT
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()</pre>
+      </div>
     </div>
   </div>
-
+  
   <script>
-    function showTab(tabName) {
-      const tabs = ['exploits', 'scripts'];
-      tabs.forEach(tab => {
-        document.getElementById(tab).style.display = tab === tabName ? 'block' : 'none';
-        document.getElementById(tab + 'Tab').classList.toggle('active', tab === tabName);
-      });
-    }
-
-    function copyScript(id) {
-      const text = document.getElementById(id).innerText;
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).textContent;
       navigator.clipboard.writeText(text).then(() => {
-        alert("✅ Script copied!");
+        alert('✅ Script copied to clipboard!');
       });
     }
+    
+    // Simulate download buttons
+    document.querySelectorAll('.card-btn.download').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('⚠️ Join the Discord server to download this executor');
+      });
+    });
+    
+    // Make header button point to your Discord
+    document.querySelector('.btn-primary').addEventListener('click', () => {
+      window.open('https://discord.gg/8Mk6KXTYQj', '_blank');
+    });
   </script>
 </body>
 </html>

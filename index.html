@@ -1,358 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DARK HUB | Executor Hub</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #5865F2;
-      --secondary: #1a1a1a;
-      --accent: #57F287;
-      --text: #f8f9fa;
-      --card-bg: #23272A;
-      --danger: #ED4245;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-      transition: all 0.2s ease;
-    }
-    
-    body {
-      background: #121212;
-      color: var(--text);
-      min-height: 100vh;
-      background-image: radial-gradient(circle at 10% 20%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 90%);
-    }
-    
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    
-    /* Header */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #333;
-    }
-    
-    .logo {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #dc2626, #9b59b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    
-    .buttons {
-      display: flex;
-      gap: 1rem;
-    }
-    
-    .btn {
-      padding: 0.6rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      border: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.95rem;
-      text-decoration: none;
-    }
-    
-    .btn-discord {
-      background: var(--primary);
-      color: white;
-    }
-    
-    /* Main Content */
-    .main-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    .executor-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      border: 1px solid #333;
-      position: relative;
-    }
-    
-    .executor-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-    }
-    
-    .card-badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: var(--accent);
-      color: #000;
-      padding: 0.25rem 0.75rem;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-    
-    .card-header {
-      padding: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #333;
-    }
-    
-    .card-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    
-    .card-desc {
-      font-size: 0.95rem;
-      color: #b5bac1;
-      line-height: 1.5;
-    }
-    
-    .card-body {
-      padding: 1.5rem;
-    }
-    
-    .features {
-      margin-bottom: 1.5rem;
-    }
-    
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-      font-size: 0.9rem;
-    }
-    
-    .feature i {
-      color: var(--accent);
-      width: 20px;
-      text-align: center;
-    }
-    
-    .card-footer {
-      display: flex;
-    }
-    
-    .card-btn {
-      width: 100%;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      background: var(--primary);
-      color: white;
-    }
-    
-    /* Script Section */
-    .script-section {
-      margin-top: 3rem;
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
-    
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    .script-box {
-      background: #1e1e1e;
-      border-radius: 8px;
-      padding: 1.5rem;
-      position: relative;
-    }
-    
-    pre {
-      font-family: 'Consolas', monospace;
-      font-size: 0.9rem;
-      white-space: pre-wrap;
-      color: #c9d1d9;
-      line-height: 1.5;
-      overflow-x: auto;
-    }
-    
-    .copy-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255,255,255,0.1);
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 600;
-    }
-    
-    .copy-btn:hover {
-      background: var(--primary);
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-      
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARK HUB | Executor Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5865F2;
+            --secondary: #1a1a1a;
+            --accent: #57F287;
+            --text: #f8f9fa;
+            --card-bg: #23272A;
+            --danger: #ED4245;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.2s ease;
+        }
+        
+        body {
+            background: #121212;
+            color: var(--text);
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 10% 20%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 90%);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #dc2626, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        
+        .btn-discord {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-youtube {
+            background: #FF0000;
+            color: white;
+        }
+        
+        /* Main Content */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .executor-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+            position: relative;
+        }
+        
+        .executor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .card-desc {
+            font-size: 0.95rem;
+            color: #b5bac1;
+            line-height: 1.5;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .features {
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        .feature i {
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .card-footer {
+            display: flex;
+        }
+        
+        .card-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Script Section */
+        .script-section {
+            margin-top: 3rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .script-box {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        pre {
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            color: #c9d1d9;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .copy-btn:hover {
+            background: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+            border: 1px solid #333;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">DARK HUB</div>
-      <div class="buttons">
-        <a href="https://discord.gg/8Mk6KXTYQj" class="btn btn-discord" target="_blank"><i class="fab fa-discord"></i> Join Our Discord</a>
-      </div>
-    </div>
-    
-    <div class="main-grid">
-      <!-- Xeno -->
-      <div class="executor-card">
-        <div class="card-badge">BEST</div>
-        <div class="card-header">
-          <div class="card-title"><i class="fas fa-bolt"></i> Xeno</div>
-          <div class="card-desc">The best free keyless executor</div>
+    <div class="container">
+        <header class="header">
+            <div class="logo">DARK HUB</div>
+            <div class="buttons">
+                <a href="https://discord.gg/8Mk6KXTYQj" class="btn btn-discord" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-discord"></i> Join Our Discord
+                </a>
+                <a href="https://www.youtube.com/watch?v=y9De-7sOAVw" class="btn btn-youtube" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-youtube"></i> Subscribe
+                </a>
+            </div>
+        </header>
+        
+        <div class="main-grid">
+            <!-- Xeno -->
+            <div class="executor-card">
+                <div class="card-badge">BEST</div>
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-bolt"></i> Xeno</div>
+                    <div class="card-desc">The best free keyless executor</div>
+                </div>
+                <div class="card-body">
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Level 7 Execution</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Hyperion Emulation</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Windows 10/11</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://discord.gg/xeno-now" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cloudy -->
+            <div class="executor-card">
+                <div class="card-badge">NEW</div>
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-cloud"></i> Cloudy</div>
+                    <div class="card-desc">Good executor with an API so you can make your own executor</div>
+                </div>
+                <div class="card-body">
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Level 7 Execution</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Built-in Script Hub</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Windows 10/11</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://discord.gg/getcloudy" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SubZero -->
+            <div class="executor-card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-snowflake"></i> SubZero</div>
+                    <div class="card-desc">Lightweight executor focused on speed and stability</div>
+                </div>
+                <div class="card-body">
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Level 6 Execution</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Low Detection Rate</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Windows 10/11</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://discord.gg/QzzXFxGu" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <div class="features">
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Level 7 Execution</span>
+        
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('executors')" role="tab" aria-selected="true">
+                <i class="fas fa-bolt"></i> Executors
             </div>
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Hyperion Emulation</span>
+            <div class="tab" onclick="switchTab('scripts')" role="tab" aria-selected="false">
+                <i class="fas fa-code"></i> Scripts
             </div>
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Windows 10/11</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="https://discord.gg/xeno-now" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-          </div>
         </div>
-      </div>
-      
-      <!-- Cloudy -->
-      <div class="executor-card">
-        <div class="card-badge">NEW</div>
-        <div class="card-header">
-          <div class="card-title"><i class="fas fa-cloud"></i> Cloudy</div>
-          <div class="card-desc">Good executor with an API so you can make your own executor</div>
+
+        <!-- Executors Tab -->
+        <div id="executors" class="tab-content active" role="tabpanel">
+            <!-- Remove duplicate executor cards since they're already in the main grid -->
         </div>
-        <div class="card-body">
-          <div class="features">
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Level 7 Execution</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Built-in Script Hub</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Windows 10/11</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="https://discord.gg/getcloudy" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- SubZero -->
-      <div class="executor-card">
-        <div class="card-header">
-          <div class="card-title"><i class="fas fa-snowflake"></i> SubZero</div>
-          <div class="card-desc">Lightweight executor focused on speed and stability</div>
-        </div>
-        <div class="card-body">
-          <div class="features">
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Level 6 Execution</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Low Detection Rate</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-check"></i>
-              <span>Windows 10/11</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="https://discord.gg/QzzXFxGu" class="card-btn" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- VexonHub Script Section -->
-    <div class="script-section">
-      <h2 class="section-title"><i class="fas fa-code"></i> VexonHub Script</h2>
-      <div class="script-box">
-        <button class="copy-btn" onclick="copyToClipboard('vexonScript')"><i class="far fa-copy"></i> Copy</button>
-        <pre id="vexonScript">-- key is VexonHub_4 (owner keeps updating the damn key) discord is https://discord.gg/8ccQvNadrT
+
+        <!-- Scripts Tab -->
+        <div id="scripts" class="tab-content" role="tabpanel">
+            <div class="script-section" style="margin-top: 0;">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i> VexonHub Script
+                </h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyToClipboard('vexonScript1')" aria-label="Copy VexonHub script">
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                    <pre id="vexonScript1">-- key is VexonHub_4 (owner keeps updating the damn key) discord is https://discord.gg/8ccQvNadrT
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()</pre>
-      </div>
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h2 class="section-title">
+                    <i class="fas fa-gamepad"></i> Universal Script
+                </h2>
+                <div class="script-box">
+                    <button class="copy-btn" onclick="copyToClipboard('universalScript')">
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                    <pre id="universalScript">loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()</pre>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <script>
-    function copyToClipboard(elementId) {
-      const text = document.getElementById(elementId).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert('✅ Script copied to clipboard!');
-      });
-    }
-  </script>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const scriptBox = document.getElementById(elementId).closest('.script-box');
+            const copyBtn = scriptBox.querySelector('.copy-btn');
+            const text = document.getElementById(elementId).textContent;
+            
+            copyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Copying...';
+            
+            if (!navigator.clipboard) {
+                // Fallback for browsers that don't support clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                } catch (err) {
+                    copyBtn.innerHTML = '<i class="fas fa-times"></i> Failed';
+                }
+                document.body.removeChild(textArea);
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                }, 2000);
+                return;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                }, 2000);
+            }).catch(() => {
+                copyBtn.innerHTML = '<i class="fas fa-times"></i> Failed';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+                }, 2000);
+            });
+        }
+    
+        function switchTab(tabId) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab and content
+            const selectedTab = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
+            selectedTab.classList.add('active');
+            selectedTab.setAttribute('aria-selected', 'true');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
